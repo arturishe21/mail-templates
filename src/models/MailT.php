@@ -1,0 +1,55 @@
+<?php
+namespace Vis\MailTemplates;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
+
+class MailT extends Model {
+
+
+    public $to = "";
+    public $name = "";
+    private $subject = "";
+    private $body = "";
+
+
+    public function __construct($slug, $params)
+    {
+        if ($slug && $params) {
+            $result = EmailsTemplate::where("slug", $slug)->first();
+
+            foreach ($params as $k => $el) {
+                $search[] = "{" . $k . "}";
+                $replace[] = $el;
+            }
+            $search[] = "{domen}";
+            $replace[] = $_SERVER['HTTP_HOST'];
+
+            if ($result->id) {
+                $this->subject = $result->subject;
+                $this->body = $result->body;
+
+                $this->body = str_replace(
+                    '/images/', 'http://' . $_SERVER['HTTP_HOST'] . "/images/",
+                    $this->body
+                );
+                $this->body = str_replace($search, $replace, $this->body);
+                $this->subject = str_replace($search, $replace, $this->subject);
+            }
+        }
+
+    }
+
+    public function send()
+    {
+        if ($this->to && $this->body && $this->subject) {
+            $data = array("body" => $this->body);
+
+            Mail::send('mail-templates::email_body', $data, function($message)
+            {
+                $message->to($this->to)->subject($this->subject);
+            });
+        }
+    }
+
+}
