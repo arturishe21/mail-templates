@@ -47,7 +47,17 @@ class MailT extends Model {
 
             Mail::send('mail-templates::email_body', $data, function($message)
             {
-                $message->to($this->to)->subject($this->subject);
+                if (strpos($this->to, ",")) {
+                    $toArray = explode(",", $this->to);
+
+                    foreach ($toArray as $email) {
+                        $email = trim($email);
+                        $message->to($email)->subject($this->subject);
+                    }
+                } else {
+                    $message->to($this->to)->subject($this->subject);
+                }
+
             });
         }
     }
