@@ -16,10 +16,11 @@ class MailController extends Controller
     public function fetchIndex()
     {
         $allpage = EmailsTemplate::orderBy('id', 'DESC')->paginate(20);
-
-        $view = "email_all";
+        
         if (Request::ajax()) {
             $view = "part.table_center";
+        } else {
+            $view = "email_all";
         }
 
         return View::make('mail-templates::' . $view)

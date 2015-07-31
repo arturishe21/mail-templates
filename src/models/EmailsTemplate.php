@@ -11,8 +11,7 @@ class EmailsTemplate extends Model
     protected $table = 'emails_template';
 
     //rules validation
-    public static $rules
-        = array(
+    public static $rules  = array(
             'title' => 'required',
             'slug' => 'required|max:256|unique:emails_template,slug,',
             'subject' => 'required|max:256',
@@ -47,14 +46,13 @@ class EmailsTemplate extends Model
      */
     public static function doSave($data)
     {
-        if ($data['id'] != 0) {
-            self::find($data['id'])->update($data);
-        } else {
-            self::create($data);
-        }
+        self::updateOrCreate(["id" => $data['id']], $data);
 
         return Response::json(
-            array('status' => 'ok', "ok_messages" => __cms('Сохранено'))
+            array(
+                "status" => "ok",
+                "ok_messages" => __cms('Сохранено'),
+            )
         );
     }
 
