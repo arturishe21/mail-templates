@@ -23,6 +23,19 @@ class CreateEmailsTable extends Migration {
                 $table->text('body');
             });
         }
+
+        if (!Schema::hasTable('mailer')) {
+            Schema::create('mailer', function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+
+                $table->increments('id');
+                $table->string('email_to', 255);
+                $table->string('subject', 255);
+                $table->string('body', 255);
+
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -33,6 +46,7 @@ class CreateEmailsTable extends Migration {
     public function down()
     {
         Schema::dropIfExists('emails_template');
+        Schema::dropIfExists('mailer');
     }
 
 }

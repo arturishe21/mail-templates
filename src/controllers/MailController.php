@@ -16,7 +16,7 @@ class MailController extends Controller
     public function fetchIndex()
     {
         $allpage = EmailsTemplate::orderBy('id', 'DESC')->paginate(20);
-        
+
         if (Request::ajax()) {
             $view = "part.table_center";
         } else {
@@ -31,7 +31,7 @@ class MailController extends Controller
     public function fetchCreate()
     {
         return View::make('mail-templates::part.form_emails');
-    }//end fetchCreate
+    }
 
     public function fetchEdit()
     {
@@ -41,11 +41,8 @@ class MailController extends Controller
 
             return View::make('mail-templates::part.form_emails')->with('info', $page);
         }
-    }//end fetchEdit
+    }
 
-    /*
-     * save records
-     */
     public function doSave()
     {
         parse_str(Input::get('data'), $data);
@@ -56,11 +53,8 @@ class MailController extends Controller
         }
 
         return EmailsTemplate::doSave($data);
-    }//end doSave
+    }
 
-    /*
-     * delete
-     */
     public function doDelete()
     {
         $id_page = Input::get("id");
@@ -69,5 +63,5 @@ class MailController extends Controller
         }
 
         return Response::json(array('status' => 'ok'));
-    }// end doDelete
+    }
 }

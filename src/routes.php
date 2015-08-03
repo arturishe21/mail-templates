@@ -7,11 +7,19 @@ Route::group(
     ), function () {
 
         Route::any(
-            'settings/letter', array(
+            'emails/letter_template', array(
                 'as' => 'letter_all',
                 'uses' => 'Vis\MailTemplates\MailController@fetchIndex'
             )
         );
+
+        Route::any(
+            'emails/mailer', array(
+                'as' => 'mailer',
+                'uses' => 'Vis\MailTemplates\MailerController@fetchIndex'
+            )
+        );
+
 
         if (Request::ajax()) {
             Route::post(
@@ -38,6 +46,21 @@ Route::group(
                     'uses' => 'Vis\MailTemplates\MailController@fetchEdit'
                 )
             );
+
+            Route::post(
+                'mailer/show_mail', array(
+                    'as' => 'show_mail',
+                    'uses' => 'Vis\MailTemplates\MailerController@fetchDescritionMail'
+                )
+            );
+
+            Route::post(
+                'mailer/delete', array(
+                    'as' => 'delete_email',
+                    'uses' => 'Vis\MailTemplates\MailerController@doDelete'
+                )
+            );
+
         }
     }
 );

@@ -45,6 +45,8 @@ class MailT extends Model {
         if ($this->to && $this->body && $this->subject) {
             $data = array("body" => $this->body);
 
+            $this->doAddMailer();
+
             Mail::send('mail-templates::email_body', $data, function($message)
             {
                 if (strpos($this->to, ",")) {
@@ -60,6 +62,17 @@ class MailT extends Model {
 
             });
         }
+    }
+
+    private function doAddMailer()
+    {
+        Mailer::create(
+            array(
+                "email_to" => $this->to,
+                "subject" => $this->subject,
+                "body" => $this->body,
+            )
+        );
     }
 
 }
