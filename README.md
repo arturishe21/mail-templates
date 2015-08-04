@@ -26,11 +26,34 @@ composer update
 
 В файле app/config/packages/vis/builder/admin.php в массив menu в настройки добавляем
 ```php
- 	  array(
-        'title' => 'Шаблоны писем',
-        'link'  => '/settings/letter',
-        'check' => function() {
-            return true;
-        }
-     ),
+ 	   array(
+          'title' => 'Почта',
+          'icon'  => 'envelope-o',
+          'check' => function() {
+              return true;
+          },
+          'submenu' => array(
+              array(
+                  'title' => "Шаблоны писем",
+                  'link'  => '/emails/letter_template',
+                  'check' => function() {
+                      return true;
+                  }
+              ),
+              array(
+                  'title' => "Письма",
+                  'link'  => '/emails/mailer',
+                  'check' => function() {
+                      return true;
+                  }
+              ),
+              array(
+                  'title' => "Настройки",
+                  'link'  => '/emails/settings',
+                  'check' => function() {
+                      return true;
+                  }
+              ),
+          )
+      ),
 ```
