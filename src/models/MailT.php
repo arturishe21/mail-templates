@@ -3,6 +3,7 @@ namespace Vis\MailTemplates;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Config;
 
 class MailT extends Model {
 

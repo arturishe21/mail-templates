@@ -20,6 +20,20 @@ Route::group(
             )
         );
 
+        Route::any(
+            'emails/settings', array(
+                'as' => 'email_settings',
+                'uses' => 'Vis\MailTemplates\MailSettingController@fetchIndex'
+            )
+        );
+
+        Route::post(
+            'emails/settings_save', array(
+                'as' => 'email_settings_save',
+                'uses' => 'Vis\MailTemplates\MailSettingController@doSave'
+            )
+        );
+
 
         if (Request::ajax()) {
             Route::post(
