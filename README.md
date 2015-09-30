@@ -57,3 +57,20 @@ composer update
           )
       ),
 ```
+
+Использование
+сверху
+```php
+    use Vis\MailTemplates\MailT;
+```
+
+вызов
+
+```php
+    $mail = new MailT("alias шаблона письма", array(
+        "fio" => "Вася",
+        "phone" => "097 000 00 00"
+    ));
+    $mail->to = "email";
+    $mail->send();
+```
