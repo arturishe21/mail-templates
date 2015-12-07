@@ -22,8 +22,6 @@ class MailSettingController extends Controller
             $view = "all_settings";
         }
 
-        $settings = include_once(app_path().'/config/mail.php');
-
         $driversMail = array(
             "smtp",
             "mail",
@@ -32,9 +30,8 @@ class MailSettingController extends Controller
             "mandrill",
             "log",
         );
-
-
-        return View::make('mail-templates::settings.' . $view, compact("title", 'settings', 'driversMail'));
+        
+        return View::make('mail-templates::settings.' . $view, compact("title", 'driversMail'));
     }
 
     public function doSave()
@@ -72,5 +69,4 @@ return array( \n\n";
 
         return $file;
     }
-
 }

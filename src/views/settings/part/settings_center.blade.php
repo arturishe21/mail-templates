@@ -8,13 +8,13 @@
     .smart-form fieldset.smtp_fieldset, .smart-form fieldset.send_mail_fieldset{
          display: none;
     }
-    @if($settings['driver'] == "smtp")
+    @if(Config::get("mail.driver") == "smtp")
      .smart-form fieldset.smtp_fieldset{
         display: block;
      }
     @endif
 
-     @if($settings['driver'] == "sendmail")
+     @if(Config::get("mail.driver") == "sendmail")
      .smart-form fieldset.send_mail_fieldset{
         display: block;
      }
@@ -48,7 +48,7 @@
                           <label class="select">
                               <select class="input-sm" name="driver">
                                   @foreach($driversMail as $driver)
-                                      <option value="{{$driver}}" {{$driver == $settings['driver'] ? "selected" : ""}}>{{$driver}}</option>
+                                      <option value="{{$driver}}" {{$driver ==  Config::get("mail.driver") ? "selected" : ""}}>{{$driver}}</option>
                                   @endforeach
                               </select>
                               <i></i>
@@ -61,13 +61,13 @@
                            <section class="col col-6">
                                <label class="label">{{__cms('Обратный адрес в письме')}}</label>
                                <label class="input">
-                                 <input class="input-sm" name="from[address]" value="{{$settings['from']['address']}}">
+                                 <input class="input-sm" name="from[address]" value="{{Config::get("mail.from.address")}}">
                                </label>
                            </section>
                            <section class="col col-6">
                                <label class="label">{{__cms('Имя отправителя')}}</label>
                                <label class="input">
-                                    <input class="input-sm" name="from[name]" value="{{$settings['from']['name']}}">
+                                    <input class="input-sm" name="from[name]" value="{{Config::get("mail.from.name")}}">
                                 </label>
                            </section>
                         </div>
@@ -77,7 +77,7 @@
                       <section>
                         <label class="toggle">
                            <input type="hidden" name="pretend" value="false">
-                            <input type="checkbox" value="true" {{$settings['pretend'] ? "checked ='checked'" : ""}}  name="pretend">
+                            <input type="checkbox" value="true" {{Config::get("mail.pretend") ? "checked ='checked'" : ""}}  name="pretend">
                             <i data-swchon-text="{{__cms("ДА")}}" data-swchoff-text="{{__cms("НЕТ")}}"></i>
                             {{__cms('Тестовый режим')}}
                         </label>
@@ -99,7 +99,7 @@
                    <section>
                        <label class="label">SMTP Host Address</label>
                        <label class="input">
-                           <input class="input-sm" value="{{$settings['host']}}" name="host">
+                           <input class="input-sm" value="{{Config::get("mail.host")}}" name="host">
                        </label>
                    </section>
                  </fieldset>
@@ -107,7 +107,7 @@
                    <section>
                        <label class="label">SMTP Host Port</label>
                        <label class="input">
-                           <input class="input-sm" name="port" value="{{$settings['port']}}">
+                           <input class="input-sm" name="port" value="{{Config::get("mail.port")}}">
                        </label>
                    </section>
                 </fieldset>
@@ -115,7 +115,7 @@
                    <section>
                        <label class="label">SMTP Server Username</label>
                        <label class="input">
-                           <input class="input-sm" name="username"  value="{{$settings['username']}}">
+                           <input class="input-sm" name="username"  value="{{Config::get("mail.username")}}">
                        </label>
                    </section>
                 </fieldset>
@@ -123,7 +123,7 @@
                    <section>
                        <label class="label">SMTP Server Password</label>
                        <label class="input">
-                           <input class="input-sm" name="password" value="{{$settings['password']}}">
+                           <input class="input-sm" name="password" value="{{Config::get("mail.password")}}">
                        </label>
                    </section>
                 </fieldset>
@@ -132,7 +132,7 @@
                    <section>
                        <label class="label">Sendmail System Path</label>
                        <label class="input">
-                           <input class="input-sm" name="sendmail" value="{{$settings['sendmail']}}">
+                           <input class="input-sm" name="sendmail" value="{{Config::get("mail.sendmail")}}">
                        </label>
                    </section>
                 </fieldset>
