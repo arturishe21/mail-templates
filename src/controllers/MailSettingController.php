@@ -30,7 +30,7 @@ class MailSettingController extends Controller
             "mandrill",
             "log",
         );
-        
+
         return View::make('mail-templates::settings.' . $view, compact("title", 'driversMail'));
     }
 

@@ -21,7 +21,7 @@ var Emails = {
             submitHandler: function(form) {
 
                 $( ".text_block" ).each(function( index ) {
-                    var text = $(this).editable("getHTML", true, true);
+                    var text = $('.text_block').froalaEditor('html.get', true);
                     $("textarea[name="+$(this).attr("name")+"]").val(text);
                 });
 
