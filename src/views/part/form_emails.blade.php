@@ -47,10 +47,7 @@
        <div class="row">
             <section class="col" style="float: none">
                  <label class="label">{{__cms('Тело письма')}}</label>
-
-                 <div class="text_block" name="body">{{$info->body or ""}}</div>
-                 <textarea name="body"  style="display: none"></textarea>
-
+                 <textarea name="body" class="text_block">{{$info->body or ""}}</textarea>
             </section>
         </div>
       </fieldset>

@@ -19,11 +19,11 @@ var Emails = {
     {
         var $checkoutForm = $('#form_page').validate({
             submitHandler: function(form) {
-
-                $( ".text_block" ).each(function( index ) {
-                    var text = $('.text_block').froalaEditor('html.get', true);
-                    $("textarea[name="+$(this).attr("name")+"]").val(text);
-                });
+                /*
+                 $( ".text_block" ).each(function( index ) {
+                 var text = $(this).editable("getHTML", true, true);
+                 $("textarea[name="+$(this).attr("name")+"]").val(text);
+                 });*/
 
                 Emails.AddRec();
 
@@ -75,7 +75,7 @@ var Emails = {
 
     AddRec: function()
     {
-        $.post("/admin/emails/add_record", {data:$('#form_page').serialize() },
+        $.post("/admin/emails/add_record", {data : $('#form_page').serialize() },
             function(data){
                 if (data.status=="ok") {
 
