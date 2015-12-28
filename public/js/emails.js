@@ -148,7 +148,6 @@ var Emails = {
         });
     }
 };
-
 $(window).load(function(){
     Emails.init();
     $(document).on('click', '#modal_form .close, .modal-footer button', function (e) {
@@ -156,5 +155,3 @@ $(window).load(function(){
         window.history.pushState(url, '', url);
     });
 });
-
-
