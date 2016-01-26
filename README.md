@@ -72,5 +72,7 @@ composer update
         "phone" => "097 000 00 00"
     ));
     $mail->to = "email";
+    $mail->attach = Input::file('file_name'); //если нужно много файлов переслать, то оформлять как массив : array(Input::file('file_name'), Input::file('file_name'))
+
     $mail->send();
 ```

@@ -10,6 +10,7 @@ class MailT extends Model {
 
     public $to = "";
     public $name = "";
+    public $attach = "";
     private $subject = "";
     private $body = "";
 
@@ -46,6 +47,7 @@ class MailT extends Model {
         if ($this->to && $this->body && $this->subject) {
             $data = array("body" => $this->body);
 
+            //save in logs
             $this->doAddMailer();
 
             Mail::send('mail-templates::email_body', $data, function($message)
@@ -59,6 +61,23 @@ class MailT extends Model {
                     }
                 } else {
                     $message->to($this->to)->subject($this->subject);
+                }
+
+                //if isset attach file
+                if ($this->attach) {
+                    if (is_array($this->attach)) {
+                        foreach ($this->attach as $attach) {
+                            $message->attach($attach->getRealPath(), array(
+                                    'as' => $attach->getClientOriginalName(),
+                                    'mime' => $attach->getMimeType())
+                            );
+                        }
+                    } else {
+                        $message->attach($this->attach->getRealPath(), array(
+                                'as' => $this->attach->getClientOriginalName(),
+                                'mime' => $this->attach->getMimeType())
+                        );
+                    }
                 }
 
             });
