@@ -79,8 +79,12 @@ class MailT extends Model {
                         );
                     }
                 }
-
             });
+
+            return true;
+
+        } else {
+            return false;
         }
     }
 
