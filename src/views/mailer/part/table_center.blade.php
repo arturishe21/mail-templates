@@ -34,10 +34,10 @@
                         <tr class="tr_{{$mail->id}} " id_page="{{$mail->id}}">
                             <td>{{$mail->id}}</td>
                             <td style="text-align: left;">
-                                <a href="mailto:{{$mail->email_to}}">{{$mail->email_to}}</a>
+                                <a href="mailto:{{{$mail->email_to}}}">{{{$mail->email_to}}}</a>
                             </td>
-                            <td>{{$mail->subject}}</td>
-                            <td><p rel="tooltip" title="<a>Создать</a> копию">{{str_limit(strip_tags($mail->body),50)}}</p></td>
+                            <td>{{{$mail->subject}}}</td>
+                            <td><p rel="tooltip" title="<a>Создать</a> копию">{{{str_limit(strip_tags($mail->body),50)}}}</p></td>
                             <td>{{$mail->created_at}}</td>
                            <td>
                               <div class="btn-group hidden-phone pull-right">

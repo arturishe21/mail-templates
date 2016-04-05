@@ -5,24 +5,24 @@
 <div class="modal-body">
     <section>
         <p>
-            <strong>{{__cms('Тема письма')}}</strong>: {{$mail->subject}}
+            <strong>{{__cms('Тема письма')}}</strong>: {{{$mail->subject}}}
         </p>
     </section>
 
     <section>
         <p>
-            <strong>{{__cms('Кому')}}</strong>: {{$mail->email_to}}
+            <strong>{{__cms('Кому')}}</strong>: {{{$mail->email_to}}}
         </p>
     </section>
     <section>
         <p>
-            <strong>{{__cms('Дата отправки')}}</strong>: {{$mail->created_at}}
+            <strong>{{__cms('Дата отправки')}}</strong>: {{{$mail->created_at}}}
         </p>
     </section>
     <section>
         <p><strong>{{__cms('Тело письма')}}</strong>:</p>
         <div>
-           {{$mail->body}}
+            {{{$mail->body}}}
         </div>
     </section>
    {{-- <p><a class="">Ответить</a></p>
