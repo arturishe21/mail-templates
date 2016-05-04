@@ -4,6 +4,7 @@ namespace Vis\MailTemplates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Request;
 
 class MailT extends Model {
 
@@ -32,7 +33,7 @@ class MailT extends Model {
                 $this->body = $result->body;
 
                 $this->body = str_replace(
-                    '/images/', 'http://' . $_SERVER['HTTP_HOST'] . "/images/",
+                    '/images/', 'http://' . Request::server ("HTTP_HOST") . "/images/",
                     $this->body
                 );
                 $this->body = str_replace($search, $replace, $this->body);
